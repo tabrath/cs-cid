@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using BinaryEncoding;
 using Multiformats.Base;
 using Multiformats.Hash;
-using Multiformats.Hash.Algorithms;
 
 namespace ContentIdentifier
 {

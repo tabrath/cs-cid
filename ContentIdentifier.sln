@@ -5,6 +5,16 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentIdentifier", "ContentIdentifier\ContentIdentifier.csproj", "{5092CF86-B2DA-40C4-91BC-42CA61EB2E1B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentIdentifier.Tests", "ContentIdentifier.Tests\ContentIdentifier.Tests.csproj", "{5AC9CEE8-97DA-4120-A653-C0A2AB58883A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{22F6DA1F-A0EC-4063-B7DA-B5EE0631935A}"
+	ProjectSection(SolutionItems) = preProject
+		.travis.yml = .travis.yml
+		appveyor.yml = appveyor.yml
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +25,10 @@ Global
 		{5092CF86-B2DA-40C4-91BC-42CA61EB2E1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5092CF86-B2DA-40C4-91BC-42CA61EB2E1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5092CF86-B2DA-40C4-91BC-42CA61EB2E1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AC9CEE8-97DA-4120-A653-C0A2AB58883A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AC9CEE8-97DA-4120-A653-C0A2AB58883A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AC9CEE8-97DA-4120-A653-C0A2AB58883A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AC9CEE8-97DA-4120-A653-C0A2AB58883A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

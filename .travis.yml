@@ -1,0 +1,14 @@
+language: csharp
+solution: ContentIdentifier.sln
+branches:
+  only:
+    - master
+install:
+  - nuget restore ContentIdentifier/packages.config -PackagesDirectory ./packages
+  - nuget restore ContentIdentifier.Tests/packages.config -PackagesDirectory ./packages
+script:
+  - xbuild /p:Configuration=Release ContentIdentifier.sln
+  - mono ./packages/NUnit.ConsoleRunner.3.5.0/tools/nunit3-console.exe ./ContentIdentifier.Tests/bin/Release/ContentIdentifier.Tests.dll
+cache:
+  - directories:
+    - ./packages
