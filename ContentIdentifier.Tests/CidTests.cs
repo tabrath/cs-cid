@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Multiformats.Base;
+using Multiformats.Codec;
 using Multiformats.Hash;
 using Multiformats.Hash.Algorithms;
 using NUnit.Framework;
@@ -17,7 +18,7 @@ namespace ContentIdentifier.Tests
         public void TestBasicMarshaling()
         {
             var h = Multihash.Sum<SHA3_512>(Encoding.UTF8.GetBytes("TEST"), 4);
-            var cid = new Cid(CidCodec.DagCBOR, h);
+            var cid = new Cid(MulticodecCode.DagCBOR, h);
 
             var data = cid.ToBytes();
             var output = Cid.Cast(data);
@@ -50,7 +51,7 @@ namespace ContentIdentifier.Tests
         {
             var data = Encoding.UTF8.GetBytes("this is some test content");
             var hash = Multihash.Sum<SHA2_256>(data);
-            var c = new Cid(CidCodec.DagCBOR, hash);
+            var c = new Cid(MulticodecCode.DagCBOR, hash);
             var pref = c.Prefix;
             var c2 = pref.Sum(data);
 
@@ -67,7 +68,7 @@ namespace ContentIdentifier.Tests
         {
             var data = Encoding.UTF8.GetBytes("this is some test content");
             var hash = Multihash.Sum<SHA2_256>(data);
-            var c = new Cid((CidCodec)(1UL << 63), hash);
+            var c = new Cid((MulticodecCode)(1UL << 63), hash);
 
             Assert.DoesNotThrow(() => c.ToBytes());
         }

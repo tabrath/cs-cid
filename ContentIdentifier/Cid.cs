@@ -3,35 +3,21 @@ using System.Linq;
 using System.Text;
 using BinaryEncoding;
 using Multiformats.Base;
+using Multiformats.Codec;
 using Multiformats.Hash;
 
 namespace ContentIdentifier
 {
-    public enum CidCodec : ulong
-    {
-        Raw = 0x55,
-
-        DagProtobuf = 0x70,
-        DagCBOR = 0x71,
-
-        EtherumBlock = 0x90,
-        EtherumTx = 0x91,
-        BitcoinBlock = 0xb0,
-        BitcoinTx = 0xb1,
-        ZcashBlock = 0xc0,
-        ZcashTx = 0xc1
-    }
-
     public class Cid
     {
         private readonly ulong _version;
 
-        public CidCodec Type { get; }
+        public MulticodecCode Type { get; }
         public Multihash Hash { get; }
         public string KeyString => Encoding.UTF8.GetString(ToBytes());
         public Prefix Prefix => new Prefix(_version, Type, Hash.Code, Hash.Length);
 
-        protected Cid(ulong version, CidCodec codec, Multihash hash)
+        protected Cid(ulong version, MulticodecCode codec, Multihash hash)
         {
             _version = version;
             Type = codec;
@@ -39,11 +25,11 @@ namespace ContentIdentifier
         }
 
         public Cid(Multihash hash)
-            : this(0, CidCodec.DagProtobuf, hash)
+            : this(0, MulticodecCode.DagProtobuf, hash)
         {
         }
 
-        public Cid(CidCodec codec, Multihash hash)
+        public Cid(MulticodecCode codec, Multihash hash)
             : this(1, codec, hash)
         {
         }
@@ -82,7 +68,7 @@ namespace ContentIdentifier
 
             var hash = Multihash.Cast(rest);
 
-            return new Cid(vers, (CidCodec)codec, hash);
+            return new Cid(vers, (MulticodecCode)codec, hash);
         }
 
         public override string ToString()

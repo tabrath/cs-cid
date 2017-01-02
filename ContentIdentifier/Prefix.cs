@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using BinaryEncoding;
+using Multiformats.Codec;
 using Multiformats.Hash;
 
 namespace ContentIdentifier
@@ -8,11 +9,11 @@ namespace ContentIdentifier
     public class Prefix
     {
         public ulong Version { get; }
-        public CidCodec Codec { get; }
+        public MulticodecCode Codec { get; }
         public HashType MultihashType { get; }
         public int MultihashLength { get; }
 
-        internal Prefix(ulong version, CidCodec codec, HashType mhType, int mhLength)
+        internal Prefix(ulong version, MulticodecCode codec, HashType mhType, int mhLength)
         {
             Version = version;
             Codec = codec;
@@ -32,7 +33,7 @@ namespace ContentIdentifier
             offset += Binary.Varint.Read(buf, offset, out mhlength);
 
             Version = vers;
-            Codec = (CidCodec) codec;
+            Codec = (MulticodecCode) codec;
             MultihashType = (HashType) mhtype;
             MultihashLength = (int) mhlength;
         }
