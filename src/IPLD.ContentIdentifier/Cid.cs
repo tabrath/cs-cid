@@ -6,7 +6,7 @@ using Multiformats.Base;
 using Multiformats.Codec;
 using Multiformats.Hash;
 
-namespace ContentIdentifier
+namespace IPLD.ContentIdentifier
 {
     public class Cid
     {
@@ -25,7 +25,7 @@ namespace ContentIdentifier
         }
 
         public Cid(Multihash hash)
-            : this(0, MulticodecCode.DagProtobuf, hash)
+            : this(0, MulticodecCode.MerkleDAGProtobuf, hash)
         {
         }
 

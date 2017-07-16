@@ -4,7 +4,7 @@ using BinaryEncoding;
 using Multiformats.Codec;
 using Multiformats.Hash;
 
-namespace ContentIdentifier
+namespace IPLD.ContentIdentifier
 {
     public class Prefix
     {
@@ -70,5 +70,7 @@ namespace ContentIdentifier
                    MultihashType == other.MultihashType &&
                    MultihashLength == other.MultihashLength;
         }
+
+        public override int GetHashCode() => (int)Version ^ (int)Codec ^ (int)MultihashType ^ MultihashLength;
     }
 }

@@ -1,76 +1,72 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Multiformats.Base;
 using Multiformats.Codec;
 using Multiformats.Hash;
 using Multiformats.Hash.Algorithms;
-using NUnit.Framework;
+using Xunit;
 
-namespace ContentIdentifier.Tests
+namespace IPLD.ContentIdentifier.Tests
 {
-    [TestFixture]
     public class CidTests
     {
-        [Test]
+        [Fact]
         public void TestBasicMarshaling()
         {
             var h = Multihash.Sum<SHA3_512>(Encoding.UTF8.GetBytes("TEST"), 4);
-            var cid = new Cid(MulticodecCode.DagCBOR, h);
+            var cid = new Cid(MulticodecCode.MerkleDAGCBOR, h);
 
             var data = cid.ToBytes();
             var output = Cid.Cast(data);
-            Assert.That(output, Is.EqualTo(cid));
+            Assert.Equal(cid, output);
 
             var s = cid.ToString();
             output = Cid.Decode(s);
-            Assert.That(output, Is.EqualTo(cid));
+            Assert.Equal(cid, output);
         }
 
-        [Test]
+        [Fact]
         public void TestEmptyString()
         {
             Assert.Throws<ArgumentException>(() => Cid.Decode(""));
         }
 
-        [Test]
+        [Fact]
         public void TestV0Handling()
         {
             var old = "QmdfTbBqBPQ7VNxZEYEj14VmRuZBkqFbiwReogJgS1zR1n";
             var cid = Cid.Decode(old);
 
-            Assert.That(cid.Prefix.Version, Is.EqualTo(0));
-            Assert.That(cid.Hash.ToString(Multibase.Base58), Is.EqualTo(old));
-            Assert.That(cid.ToString(), Is.EqualTo(old));
+            Assert.Equal((ulong)0, cid.Prefix.Version);
+            Assert.Equal(old, cid.Hash.ToString(Multibase.Base58));
+            Assert.Equal(old, cid.ToString());
         }
 
-        [Test]
+        [Fact]
         public void TestPrefixRoundtrip()
         {
             var data = Encoding.UTF8.GetBytes("this is some test content");
             var hash = Multihash.Sum<SHA2_256>(data);
-            var c = new Cid(MulticodecCode.DagCBOR, hash);
+            var c = new Cid(MulticodecCode.MerkleDAGCBOR, hash);
             var pref = c.Prefix;
             var c2 = pref.Sum(data);
 
-            Assert.That(c2, Is.EqualTo(c));
+            Assert.Equal(c, c2);
 
             var pb = pref.ToBytes();
             var pref2 = new Prefix(pb);
 
-            Assert.That(pref2, Is.EqualTo(pref));
+            Assert.Equal(pref, pref2);
         }
 
-        [Test]
+        [Fact]
         public void Test16BytesVarint()
         {
             var data = Encoding.UTF8.GetBytes("this is some test content");
             var hash = Multihash.Sum<SHA2_256>(data);
             var c = new Cid((MulticodecCode)(1UL << 63), hash);
 
-            Assert.DoesNotThrow(() => c.ToBytes());
+            c.ToBytes();
         }
     }
 }
