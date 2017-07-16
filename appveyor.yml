@@ -82,6 +82,7 @@ artifacts:
 cache:
   - '%USERPROFILE%\.nuget\packages -> **\*.csproj'
   - '.\packages -> **\*.csproj'
+  - '.\tools -> **\*.csproj'
 
 nuget:
   account_feed: true
