@@ -5,7 +5,7 @@
 
     <AssemblyTitle>IPLD.ContentIdentifier</AssemblyTitle>
     <AssemblyName>IPLD.ContentIdentifier</AssemblyName>
-    <VersionPrefix>1.1.0</VersionPrefix>
+    <VersionPrefix>1.1.1</VersionPrefix>
     <Authors>tabrath</Authors>
     <PackageId>IPLD.ContentIdentifier</PackageId>
     <PackageTags>ipld cid</PackageTags>
