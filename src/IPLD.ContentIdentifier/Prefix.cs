@@ -13,7 +13,7 @@ namespace IPLD.ContentIdentifier
         public HashType MultihashType { get; }
         public int MultihashLength { get; }
 
-        internal Prefix(ulong version, MulticodecCode codec, HashType mhType, int mhLength)
+        public Prefix(ulong version, MulticodecCode codec, HashType mhType, int mhLength)
         {
             Version = version;
             Codec = codec;
